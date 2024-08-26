@@ -11,7 +11,7 @@ export const addTaskToBD = task =>
     body: JSON.stringify(task),
   });
 
-export const setCompleted = (id, task) =>
+export const changeCompleted = (id, task) =>
   fetch(`${baseURL}/${id}`, {
     method: 'PUT',
     headers: {
@@ -20,7 +20,7 @@ export const setCompleted = (id, task) =>
     body: JSON.stringify(task),
   });
 
-export const deleteTask = id =>
+export const deleteTaskFromDB = id =>
   fetch(`${baseURL}/${id}`, {
     method: 'DELETE',
   });
