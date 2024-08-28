@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const CreateTaskInput = ({ addTask }) => {
   const [inputText, setInputText] = useState('');
@@ -16,6 +17,10 @@ const CreateTaskInput = ({ addTask }) => {
       </button>
     </div>
   );
+};
+
+CreateTaskInput.propTypes = {
+  addTask: PropTypes.func,
 };
 
 export default CreateTaskInput;

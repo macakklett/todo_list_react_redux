@@ -38,12 +38,21 @@ export const fetchTasksList = () => dispatch => {
   getTasks().then(tasks => dispatch(setTasksList(tasks)));
 };
 
-export const addTask = task => dispatch => {
-  addTaskToBD(task).then(response => dispatch(addTaskToState(response)));
+export const addTask = text => dispatch => {
+  const task = {
+    text,
+    createdAt: new Date().toISOString(),
+    done: false,
+  };
+
+  addTaskToBD(task)
+    .then(response => response.json())
+    .then(data => dispatch(addTaskToState(data)));
 };
 
-export const changeIsCompletedTask = taskId => dispatch => {
-  changeCompleted(taskId).then(() => dispatch(changeDone(taskId)));
+export const changeIsCompletedTask = taskId => (dispatch, getState) => {
+  const task = getState().tasks.tasksList.find(el => el.id === taskId);
+  changeCompleted(taskId, { ...task, done: !task.done }).then(() => dispatch(changeDone(taskId)));
 };
 
 export const deleteTask = taskId => dispatch => {
