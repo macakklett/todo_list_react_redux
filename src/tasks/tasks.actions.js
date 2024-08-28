@@ -45,9 +45,7 @@ export const addTask = text => dispatch => {
     done: false,
   };
 
-  addTaskToBD(task)
-    .then(response => response.json())
-    .then(data => dispatch(addTaskToState(data)));
+  addTaskToBD(task).then(data => dispatch(addTaskToState(data)));
 };
 
 export const changeIsCompletedTask = taskId => (dispatch, getState) => {
